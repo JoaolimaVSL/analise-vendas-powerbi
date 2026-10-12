@@ -1,0 +1,274 @@
+Etapas de desenvolvimento
+1. Análise exploratória dos dados
+
+Antes de iniciar a construção do dashboard, foi realizada uma análise exploratória da base de dados no Excel.
+
+Foram examinadas duas abas principais:
+
+Registro de vendas: informações sobre pedidos, datas, lojas, produtos, quantidades, preços unitários e pagamentos.
+Lojas: informações sobre os códigos e as identificações das lojas.
+
+Durante essa análise, foram identificadas inconsistências nos nomes dos produtos, informações agrupadas em uma mesma coluna e a necessidade de relacionar as tabelas.
+
+Essa etapa permitiu identificar quais informações poderiam ser utilizadas nas análises comerciais.
+
+2. Importação dos dados para o Power BI
+
+Os dados foram importados do Excel utilizando a opção Obter dados → Pasta de trabalho do Excel.
+
+Em seguida, as tabelas foram selecionadas e abertas no Power Query por meio da opção Transformar dados, permitindo realizar os ajustes antes de carregar as informações para o relatório.
+
+3. Tratamento e padronização no Power Query
+
+O tratamento dos dados foi uma das etapas fundamentais do projeto.
+
+3.1. Correção dos nomes dos produtos
+
+Foi identificado um nome de produto escrito incorretamente. A inconsistência foi corrigida utilizando o recurso Substituir valores, garantindo a padronização das informações.
+
+3.2. Padronização de letras maiúsculas e minúsculas
+
+Os nomes dos produtos apresentavam diferentes padrões de escrita. Foi aplicada a transformação de texto para padronizar a primeira letra de cada palavra em maiúscula, melhorando a consistência dos dados.
+
+3.3. Separação da quantidade e do preço unitário
+
+Uma coluna continha duas informações separadas por uma barra: quantidade e preço unitário.
+
+Foi utilizado o recurso Dividir coluna por delimitador, permitindo separar os valores em duas colunas distintas.
+
+Essa alteração possibilitou realizar cálculos e análises individuais para cada informação.
+
+3.4. Ajuste dos tipos de dados
+
+Os tipos de dados foram revisados conforme a finalidade de cada coluna:
+
+Identificadores e nomes: texto, quando apropriado.
+Datas dos pedidos: tipo data.
+Quantidades: número inteiro.
+Preços unitários: número decimal fixo, apropriado para valores monetários.
+
+3.5. Correção da tabela de lojas
+
+A tabela de lojas foi ajustada para utilizar a primeira linha como cabeçalho, corrigindo a estrutura dos campos importados.
+
+3.6. Renomeação das tabelas
+
+A tabela de registros de vendas foi renomeada para facilitar sua identificação e organização no modelo de dados.
+
+3.7. Verificação da qualidade dos dados
+
+Foram explorados os recursos de qualidade, distribuição e perfil das colunas, que permitem identificar valores vazios, erros e características dos dados.
+
+4. Criação da coluna de valor da venda
+
+Após separar a quantidade do preço unitário, foi criada uma nova coluna calculada no Power Query utilizando o recurso Adicionar coluna → Padrão → Multiplicar.
+
+A operação foi realizada entre as colunas de quantidade e preço unitário.
+
+A lógica aplicada foi:
+
+Valor da venda = Quantidade × Preço unitário
+
+A nova coluna foi nomeada Valor venda e passou a representar o valor total de cada registro de venda.
+
+Após as transformações, os dados foram carregados no Power BI utilizando Fechar e aplicar.
+
+5. Criação dos primeiros indicadores
+
+Com os dados tratados, foram criados cartões para apresentar os principais indicadores financeiros.
+
+5.1. Faturamento total
+
+Foi criado um cartão utilizando a soma da coluna Valor venda.
+
+5.2. Ticket médio
+
+Foi criado outro cartão utilizando a média dos valores de venda.
+
+O ticket médio representa a média dos valores individuais dos registros considerados no cálculo.
+
+5.3. Formatação dos cartões
+
+Os cartões foram personalizados com ajustes de:
+
+Tamanho dos números.
+Cor do texto.
+Cor de fundo.
+Remoção dos rótulos desnecessários.
+Renomeação dos indicadores.
+Organização e posicionamento no relatório.
+6. Análise do faturamento por período
+
+Foi criado um gráfico de barras para acompanhar a evolução do faturamento ao longo do tempo.
+
+Configuração do visual:
+
+Eixo X: data do pedido, utilizando a hierarquia de datas para visualizar ano e mês.
+Valores: soma de Valor venda.
+
+Foram realizadas melhorias na apresentação do gráfico:
+
+Alteração do título para Faturamento por Período.
+Ajuste das cores e dos rótulos.
+Remoção de títulos redundantes dos eixos.
+Formatação do tamanho dos textos.
+Inclusão de uma linha de referência para representar o faturamento médio mensal.
+
+Essa visualização permite comparar os períodos e identificar variações no faturamento.
+
+7. Análise do faturamento por tipo de pagamento
+
+Foi criado um gráfico de pizza para comparar a participação dos tipos de pagamento no faturamento.
+
+Configuração do visual:
+
+Valores: soma de Valor venda.
+Legenda: tipo de pagamento.
+
+Foram ajustados o título, as cores, a posição da legenda e os rótulos de dados, incluindo valores e percentuais.
+
+O gráfico permite observar como o faturamento está distribuído entre as modalidades de pagamento.
+
+8. Configuração das interações entre os gráficos
+
+Foi utilizado o recurso Editar interações para controlar como os visuais respondem às seleções realizadas pelo usuário.
+
+Foram explorados os comportamentos de:
+
+Filtrar os dados exibidos em outros gráficos.
+Realçar os valores relacionados à seleção.
+Desativar interações quando elas não forem necessárias.
+
+Esse recurso permite personalizar a navegação pelo dashboard e tornar as análises mais intuitivas.
+
+9. Criação do gráfico de faturamento por loja
+
+Foi criado um gráfico de barras para analisar o faturamento de cada loja.
+
+Inicialmente, foi utilizado o código da loja. Depois, tentou-se utilizar o nome da loja, mas os valores apareceram repetidos porque as tabelas ainda não estavam relacionadas corretamente.
+
+Para resolver o problema, foi criada uma relação entre as tabelas de vendas e lojas utilizando o código da loja como chave.
+
+Após estabelecer o relacionamento, o Power BI passou a cruzar as informações corretamente.
+
+Essa etapa demonstrou a importância da modelagem de dados para evitar resultados incorretos nos relatórios.
+
+10. Criação da tabela de faturamento por produto
+
+Foi adicionada uma tabela para apresentar o faturamento de cada produto.
+
+Campos utilizados:
+
+Produto.
+Valor venda.
+
+Foram realizadas melhorias para facilitar a leitura:
+
+Ajuste da formatação monetária.
+Remoção das casas decimais desnecessárias.
+Renomeação dos campos exibidos.
+Ajuste do cabeçalho, das fontes e do espaçamento.
+
+10.1. Participação percentual no faturamento
+
+O campo Valor venda foi adicionado novamente à tabela e configurado para apresentar o valor como percentual do total geral.
+
+Dessa forma, a tabela passou a exibir tanto o faturamento quanto a participação percentual de cada produto no total.
+
+10.2. Formatação condicional
+
+Foi aplicada uma barra de dados à coluna percentual, criando uma representação visual da participação de cada produto.
+
+11. Criação de um filtro por produto
+
+Foi adicionada uma segmentação de dados para permitir a seleção dos produtos.
+
+O visual foi configurado no formato de blocos, com ajustes de tamanho e aparência.
+
+Também foram configuradas as interações para impedir que a segmentação afetasse visuais que deveriam permanecer independentes da seleção.
+
+Com isso, o usuário passou a poder explorar os dados de produtos específicos de maneira interativa.
+
+12. Inclusão do título principal
+
+Foi adicionada uma caixa de texto com o título Gestão de Vendas.
+
+O texto foi formatado e posicionado na parte superior do relatório, identificando o tema principal do dashboard.
+
+13. Criação de um template visual personalizado
+
+Após construir os gráficos e indicadores, foi realizada uma reformulação visual do relatório.
+
+O tutorial demonstra a criação de um template de fundo utilizando o Microsoft PowerPoint.
+
+O processo envolveu:
+
+Criar formas geométricas para organizar as áreas do dashboard.
+Definir cores de fundo e áreas destinadas aos gráficos.
+Adicionar títulos e ícones relacionados às informações apresentadas.
+Organizar os elementos para estabelecer uma hierarquia visual.
+Salvar o template como imagem.
+Importar a imagem no Power BI como plano de fundo da página.
+
+O template foi utilizado para posicionar os cartões, gráficos, tabela e filtros em uma composição visual mais organizada.
+
+14. Ajustes finais de design
+
+Com o novo fundo, foram realizados ajustes adicionais nos elementos do dashboard.
+
+As principais melhorias demonstradas foram:
+
+Alteração das cores dos textos para aumentar o contraste com o fundo.
+Ajuste das cores das barras e dos gráficos.
+Formatação dos eixos e dos rótulos.
+Personalização das cores da linha de referência.
+Remoção de fundos desnecessários dos visuais.
+Ajustes nas cores do cabeçalho e das linhas da tabela.
+Padronização de fontes, tamanhos e alinhamentos.
+Reposicionamento dos elementos para harmonizar o layout.
+Ajuste da apresentação dos cartões de faturamento e ticket médio.
+
+O objetivo dessa etapa foi melhorar a legibilidade, a consistência visual e a apresentação das informações.
+
+15. Criação da medida de comissão com DAX
+
+Foi criada uma medida personalizada para calcular uma comissão equivalente a 5% do faturamento.
+
+A medida foi criada utilizando a opção Nova medida e a linguagem DAX.
+
+Fórmula utilizada no tutorial:
+
+Comissão = SUM(Vendas[Valor venda]) * 0.05
+
+A medida calcula 5% da soma dos valores de venda considerados no contexto de filtros do relatório.
+
+Depois, foi aplicada a formatação monetária e a medida foi adicionada a um cartão no dashboard.
+
+Observação: a fórmula utiliza o nome Vendas para a tabela. Caso o nome da tabela no seu arquivo seja diferente, será necessário ajustá-lo na expressão DAX.
+
+16. Publicação e atualização do relatório
+
+A etapa final demonstrada no tutorial consiste na publicação e manutenção do dashboard.
+
+O Power BI permite publicar o relatório no serviço online para compartilhamento, conforme as permissões, licenças e configurações da conta.
+
+Também foi demonstrada a atualização dos dados por meio do botão Atualizar, que executa novamente as consultas e transformações configuradas no projeto.
+
+Dessa forma, quando novos registros são adicionados à fonte de dados, o relatório pode ser atualizado sem repetir manualmente todas as etapas de tratamento.
+
+
+Principais conhecimentos aplicados
+O desenvolvimento deste projeto permitiu explorar conceitos importantes de análise de dados e Business Intelligence:
+
+Análise exploratória de dados.
+Limpeza e padronização de informações.
+Transformação de dados com Power Query.
+Definição de tipos de dados.
+Criação de colunas calculadas.
+Modelagem e relacionamento entre tabelas.
+Criação de medidas com DAX.
+Construção de indicadores e gráficos interativos.
+Formatação condicional.
+Configuração de interações entre visuais.
+Design e organização de dashboards.
+Publicação e atualização de relatórios.
